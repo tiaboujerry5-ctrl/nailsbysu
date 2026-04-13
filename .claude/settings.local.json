@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p apps)",
+      "Bash(npx create-next-app@latest apps/web --typescript --tailwind --eslint --app --no-src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(./node_modules/.bin/prisma db:*)",
+      "Bash(grep -E \"^\\(express|argon2|helmet|cors|jsonwebtoken|multer|zod|dotenv\\)$\")",
+      "Bash(grep -E \"^\\(express|argon2|helmet|cors|jsonwebtoken|multer|dotenv\\)$\")",
+      "Bash(npx tsx:*)",
+      "Bash(curl -s http://localhost:4000/health)",
+      "Bash(kill %1)",
+      "Bash(wait)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run:*)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(npm create:*)",
+      "Bash(cp /c/Users/Utilisateur/Downloads/nails7.jpg /c/Users/Utilisateur/Nailsbysu-landing/public/hero-nails.jpg)",
+      "Bash(cp '/c/Users/Utilisateur/OneDrive/Images/Screenshots/Capture d'\\\\''écran 2026-04-12 081739.png' /c/Users/Utilisateur/Nailsbysu-landing/public/insta-1.jpg)",
+      "Bash(cp '/c/Users/Utilisateur/OneDrive/Images/Screenshots/Capture d'\\\\''écran 2026-04-12 081746.png' /c/Users/Utilisateur/Nailsbysu-landing/public/insta-2.jpg)",
+      "Bash(cp '/c/Users/Utilisateur/OneDrive/Images/Screenshots/Capture d'\\\\''écran 2026-04-12 081816.png' /c/Users/Utilisateur/Nailsbysu-landing/public/insta-3.jpg)",
+      "Bash(cp '/c/Users/Utilisateur/OneDrive/Images/Screenshots/Capture d'\\\\''écran 2026-04-12 081827.png' /c/Users/Utilisateur/Nailsbysu-landing/public/insta-4.jpg)",
+      "Bash(python3 -c ':*)",
+      "Bash(powershell -Command \"Get-Item 'C:\\\\Users\\\\Utilisateur\\\\OneDrive\\\\Images\\\\Screenshots\\\\Capture d''écran 2026-04-12 082721.png' | Select-Object FullName, Length\")",
+      "Bash(powershell.exe -Command \"dir 'C:\\\\Users\\\\Utilisateur\\\\OneDrive\\\\Images\\\\Screenshots' | Select-Object Name, Length\")",
+      "Bash(powershell.exe -NoProfile -Command ':*)",
+      "Bash(powershell.exe -NoProfile -Command \"Remove-Item -Recurse -Force 'C:\\\\Users\\\\Utilisateur\\\\Nailsbysu-landing' -ErrorAction SilentlyContinue; Write-Output 'deleted'\")"
+    ]
+  }
+}
