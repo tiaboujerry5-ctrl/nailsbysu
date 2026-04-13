@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@theme {
+  /* ─── Deep Vibrant Brand Palette ────────────────────────────────── */
+  --color-cream:       #14161f;
+  --color-cream-dark:  #1a1d2a;
+  --color-surface:     #222638;
+  --color-border:      rgba(255,255,255,0.09);
+
+  /* Vivid accent family */
+  --color-blush:       rgba(224,85,112,0.22);
+  --color-blush-deep:  rgba(224,85,112,0.4);
+  --color-accent:      #e05070;
+  --color-accent-hover:#c4405a;
+  --color-coral:       #e07650;
+  --color-mint:        #7ed4b8;
+  --color-copper:      #c98a50;
+  --color-gold:        #d4a060;
+  --color-gold-light:  #e8c07a;
+
+  /* Text */
+  --color-noir:        #f4efe8;
+  --color-charcoal:    #c4bcb2;
+  --color-taupe:       rgba(210,196,182,0.62);
+  --color-taupe-dark:  rgba(210,196,182,0.85);
+  --color-muted:       rgba(210,196,182,0.45);
+  --color-whisper:     rgba(210,196,182,0.12);
+
+  /* ─── Typography ───────────────────────────────────────────────── */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body:    "DM Sans", system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  /* ─── Motion ───────────────────────────────────────────────────── */
+  --ease-silk:   cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* ─── Radii ────────────────────────────────────────────────────── */
+  --radius-pill:       9999px;
+  --radius-card:       1.25rem;
+  --radius-card-inner: 1rem;
+}
+
+/* ─── Base ───────────────────────────────────────────────────────────── */
+:root {
+  --background: #14161f;
+  --foreground: #f4efe8;
+  color-scheme: dark;
+}
+
+html {
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  min-height: 100dvh;
+}
+
+/* ─── Focus Ring ─────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Selection ──────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(224,80,112,0.35);
+  color: #f0ebe3;
+}
+
+/* ─── Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0f1016; }
+::-webkit-scrollbar-thumb {
+  background: rgba(200,185,170,0.2);
+  border-radius: 9999px;
+}
+
+/* ─── Typography ─────────────────────────────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ─── Dark section utility ───────────────────────────────────────────── */
+.section-dark {
+  background: #0f1016;
+  color: #f0ebe3;
+}
+
+/* ─── Hover utilities (used in server components via className) ──────── */
+.btn-accent {
+  background: #e05070;
+  color: #ffffff;
+  transition: background 0.3s ease;
+}
+.btn-accent:hover { background: #c4405a; }
+
+.btn-outline-light {
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #f0ebe3;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+.btn-outline-light:hover {
+  background: rgba(224,80,112,0.15);
+  border-color: rgba(224,80,112,0.4);
+}
+
+.link-muted {
+  color: rgba(200,185,170,0.55);
+  transition: color 0.3s ease;
+}
+.link-muted:hover { color: #f0ebe3; }
+
+/* ─── Marquee infinite scroll ────────────────────────────────────────── */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+.marquee-left  { animation: marquee-left  28s linear infinite; }
+.marquee-right { animation: marquee-right 28s linear infinite; }
+
+/* ─── Grain overlay ──────────────────────────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
