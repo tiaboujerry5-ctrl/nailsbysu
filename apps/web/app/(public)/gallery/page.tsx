@@ -10,7 +10,7 @@ export default function GalleryPage() {
   return (
     <div style={{ minHeight: '100dvh', background: '#14161f' }}>
       {/* Dark header */}
-      <div style={{ paddingTop: 160, paddingBottom: 64, paddingLeft: 48, paddingRight: 48, background: '#0e1019', position: 'relative', overflow: 'hidden' }}>
+      <div className="px-6 md:px-12" style={{ paddingTop: 160, paddingBottom: 64, background: '#0e1019', position: 'relative', overflow: 'hidden' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/nails-leopard.jpg" alt="" aria-hidden style={{
           position: 'absolute', right: 0, top: 0, height: '100%', width: '28%',
@@ -34,7 +34,7 @@ export default function GalleryPage() {
 
       <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
 
-      <div style={{ background: '#14161f', padding: '64px 48px 112px' }}>
+      <div className="px-6 md:px-12" style={{ background: '#14161f', paddingTop: 64, paddingBottom: 112 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <GalleryPageClient />
         </div>

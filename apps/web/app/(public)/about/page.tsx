@@ -11,7 +11,7 @@ export default function AboutPage() {
     <div style={{ minHeight: '100dvh', background: '#14161f' }}>
 
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
-      <section style={{ paddingTop: 160, paddingBottom: 96, paddingLeft: 48, paddingRight: 48, background: '#0e1019', position: 'relative', overflow: 'hidden' }}>
+      <section className="px-6 md:px-12" style={{ paddingTop: 160, paddingBottom: 96, background: '#0e1019', position: 'relative', overflow: 'hidden' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/joylynne.png" alt="" aria-hidden style={{
           position: 'absolute', right: 0, top: 0, height: '100%', width: '32%',
@@ -20,7 +20,7 @@ export default function AboutPage() {
           WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 100%)',
           pointerEvents: 'none',
         }} />
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'end', position: 'relative', zIndex: 1 }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-end" style={{ position: 'relative', zIndex: 1 }}>
           <div>
             <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'rgba(200,185,170,0.4)', marginBottom: 20 }}>Our story</p>
             <h1 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: 'clamp(3.5rem,8vw,7rem)', color: '#f4efe8', lineHeight: 0.95, letterSpacing: '-0.03em' }}>
@@ -42,8 +42,8 @@ export default function AboutPage() {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
 
       {/* ── Full story ────────────────────────────────────────────────────── */}
-      <section style={{ padding: '96px 48px', background: '#14161f' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }}>
+      <section className="px-6 md:px-12 py-20 md:py-24" style={{ background: '#14161f' }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
           <div>
             <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'rgba(200,185,170,0.4)', marginBottom: 20 }}>
               How it started
@@ -85,7 +85,7 @@ export default function AboutPage() {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
 
       {/* ── Values ────────────────────────────────────────────────────────── */}
-      <section style={{ padding: '80px 48px', background: '#0e1019' }}>
+      <section className="px-6 md:px-12 py-16 md:py-20" style={{ background: '#0e1019' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'rgba(200,185,170,0.4)', marginBottom: 16 }}>
             What we stand for
@@ -93,7 +93,7 @@ export default function AboutPage() {
           <h2 style={{ fontFamily: '"Playfair Display", Georgia, serif', fontSize: 'clamp(2rem,3.5vw,3rem)', color: '#f4efe8', lineHeight: 1.05, letterSpacing: '-0.02em', marginBottom: 48 }}>
             Our pillars
           </h2>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 1, background: 'rgba(255,255,255,0.06)' }}>
+          <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 1, background: 'rgba(255,255,255,0.06)' }}>
             {[
               {
                 title: 'Precision',
@@ -130,8 +130,8 @@ export default function AboutPage() {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
 
       {/* ── Philosophy ────────────────────────────────────────────────────── */}
-      <section style={{ padding: '96px 48px', background: '#14161f' }}>
-        <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80 }}>
+      <section className="px-6 md:px-12 py-20 md:py-24" style={{ background: '#14161f' }}>
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
           <div>
             <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'rgba(200,185,170,0.4)', marginBottom: 20 }}>
               The approach
@@ -174,7 +174,7 @@ export default function AboutPage() {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
 
       {/* ── Privacy & Policies ────────────────────────────────────────────── */}
-      <section style={{ padding: '96px 48px', background: '#0e1019' }}>
+      <section className="px-6 md:px-12 py-20 md:py-24" style={{ background: '#0e1019' }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'rgba(200,185,170,0.4)', marginBottom: 16 }}>
             Policies &amp; privacy
@@ -183,7 +183,7 @@ export default function AboutPage() {
             How we treat your trust
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48 }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-12">
             {[
               {
                 icon: '◎',

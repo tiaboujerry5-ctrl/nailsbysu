@@ -30,7 +30,7 @@ export function Footer() {
 
       <div style={{ maxWidth: 1280, margin: '0 auto', padding: '72px 24px 40px', position: 'relative', zIndex: 1 }}>
         {/* Main grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.5fr 1fr 1fr', gap: 48, marginBottom: 60 }}>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12" style={{ marginBottom: 60 }}>
           {/* Brand */}
           <div>
             <p style={{
@@ -96,13 +96,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{
-          borderTop: '1px solid rgba(255,255,255,0.06)',
-          paddingTop: 24,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: 24 }}>
           <p style={{ fontSize: 11, color: 'rgba(200,185,170,0.3)' }}>
             &copy; {year} Nails by Su. All rights reserved.
           </p>

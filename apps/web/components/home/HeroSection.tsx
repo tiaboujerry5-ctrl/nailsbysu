@@ -59,7 +59,7 @@ export function HeroSection() {
 
       {/* Small copy top-left */}
       <motion.p
-        className="absolute top-28 left-6 md:left-12 max-w-[28ch] text-sm leading-relaxed"
+        className="absolute top-28 left-6 md:left-12 max-w-[28ch] text-xs md:text-sm leading-relaxed hidden sm:block"
         style={{ color: 'rgba(255,255,255,0.55)' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -69,7 +69,7 @@ export function HeroSection() {
       </motion.p>
 
       {/* Bottom content block */}
-      <div className="relative z-10 w-full px-6 md:px-12 pb-14">
+      <div className="relative z-10 w-full px-5 md:px-12 pb-10 md:pb-14">
         {/* Eyebrow */}
         <motion.p
           className="text-xs uppercase tracking-[0.22em] mb-5"

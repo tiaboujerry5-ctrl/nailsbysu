@@ -11,7 +11,7 @@ export default function ServicesPage() {
     <div style={{ minHeight: '100dvh', background: '#14161f' }}>
 
       {/* ── Dark header ── */}
-      <div style={{ paddingTop: 160, paddingBottom: 64, paddingLeft: 48, paddingRight: 48, background: '#0e1019', position: 'relative', overflow: 'hidden' }}>
+      <div className="px-6 md:px-12" style={{ paddingTop: 160, paddingBottom: 64, background: '#0e1019', position: 'relative', overflow: 'hidden' }}>
         {/* Ghost nail decoration */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/svc-art2.png" alt="" aria-hidden style={{
@@ -39,7 +39,7 @@ export default function ServicesPage() {
       <div style={{ height: 1, background: 'rgba(255,255,255,0.05)' }} />
 
       {/* ── Product grid ── */}
-      <div style={{ background: '#14161f', paddingBottom: 112, paddingLeft: 48, paddingRight: 48, paddingTop: 64 }}>
+      <div className="px-6 md:px-12" style={{ background: '#14161f', paddingBottom: 112, paddingTop: 64 }}>
         <div style={{ maxWidth: 1280, margin: '0 auto' }}>
           <ServicesPageClient />
         </div>

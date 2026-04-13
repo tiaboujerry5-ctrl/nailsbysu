@@ -37,7 +37,7 @@ export default function HomePage() {
         }} />
 
         <div style={{ maxWidth: 1280, margin: '0 auto', position: 'relative', zIndex: 1 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, alignItems: 'center' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
             <div>
               <p style={{
                 fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em',
@@ -56,7 +56,7 @@ export default function HomePage() {
                 <span style={{ color: '#e05070', fontStyle: 'italic' }}>the very best.</span>
               </h2>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 16, alignItems: 'flex-end' }}>
+            <div className="flex flex-col gap-4 items-start md:items-end">
               <Link
                 href="/book"
                 className="btn-accent"

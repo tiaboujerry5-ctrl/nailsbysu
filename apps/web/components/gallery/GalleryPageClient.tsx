@@ -215,11 +215,8 @@ export function GalleryPageClient() {
     <>
       {/* ── "Last clients" intro ─────────────────────────────────────────── */}
       <div
+        className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-end"
         style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 48,
-          alignItems: 'end',
           marginBottom: 56,
           paddingBottom: 48,
           borderBottom: '1px solid rgba(255,255,255,0.06)',

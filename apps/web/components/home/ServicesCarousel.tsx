@@ -177,7 +177,7 @@ export function ServicesCarousel() {
   }
 
   return (
-    <section style={{ padding: '80px 0 100px', background: '#0f1016', position: 'relative', overflow: 'hidden' }}>
+    <section style={{ padding: 'clamp(48px,8vw,80px) 0 clamp(64px,10vw,100px)', background: '#0f1016', position: 'relative', overflow: 'hidden' }}>
       {/* Ghost nail images for atmosphere */}
       {(['/svc-art1.png', '/svc-pedicure.png'] as const).map((src, i) => (
         // eslint-disable-next-line @next/next/no-img-element
@@ -216,9 +216,10 @@ export function ServicesCarousel() {
             if (info.offset.x > 60) prev()
             else if (info.offset.x < -60) next()
           }}
+          className="stage-3d"
           style={{
             position: 'relative',
-            height: 560,
+            height: 'clamp(420px, 60vw, 560px)',
             perspective: '1100px',
             perspectiveOrigin: '50% 42%',
             cursor: 'grab',

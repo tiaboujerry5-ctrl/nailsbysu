@@ -8,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div style={{ minHeight: '100dvh', background: '#14161f', paddingTop: 160, paddingBottom: 96, paddingLeft: 48, paddingRight: 48 }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'start' }}>
+    <div className="min-h-dvh px-6 md:px-12" style={{ background: '#14161f', paddingTop: 160, paddingBottom: 96 }}>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
         {/* Left */}
         <div>
           <p style={{ fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.22em', color: 'rgba(200,185,170,0.4)', marginBottom: 16 }}>

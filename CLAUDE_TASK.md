@@ -110,11 +110,37 @@
 - [x] 3D Marquee GalleryMarquee (homepage) — `components/home/GalleryMarquee.tsx`
 - [x] Full dark vibrant theme applied: services, gallery, about, contact, sign-in, footer
 - [x] Fixed "Event handlers cannot be passed to Client Component" — added `'use client'` to Footer, CSS hover classes
-- [x] Gallery page — 18 static images (6 original + 12 new nail art photos)
-- [x] 3D Animated Pin on gallery cards — tilt + glowing beam + pulsing coordinate origin
-- [x] Antigravity Canvas ring-particle background on hero section — `components/home/AntigravityCanvas.tsx`
 - [x] Color vibrancy boost — backgrounds `#14161f`, surfaces `#1e2132`, more visible accent usage
 - [x] New nail art images saved to `public/`: nails-bambi, nails-iridescent, nails-alice, nails-brownfloral, nails-polkadot, nails-pinkstripe, nails-bwstripe, nails-eden, nails-starformation, nails-lacebow, nails-monster, nails-colorful
+
+### Phase 12 — Gallery UX, About Expansion & Cloudflare Tunnel
+- [x] Gallery page — 18 static images (6 original + 12 new nail art photos)
+- [x] Gallery grid layout fixed: uniform `3/4` aspect ratio, `grid-cols-2 md:grid-cols-3 lg:grid-cols-4`
+- [x] Gallery cards: 3D tilt (±8° rotateX/Y via useSpring) + shimmer radial gradient on mouse
+- [x] Gallery card hover: frosted-glass review overlay slides up from bottom (18 fake client reviews, stars, avatar, name/handle)
+- [x] Gallery page: "View our last clients" intro section (2-col heading + description)
+- [x] Lightbox: click any gallery card to open full-screen with blur backdrop
+- [x] About page: expanded story (10-year journey, Paris training, 2019 studio opening)
+- [x] About page: image mosaic (alice/bambi/lacebow) in story section
+- [x] About page: Values section (Precision, Quality, Care — 3-col with ghost nail images)
+- [x] About page: 5-step workflow (Consultation → Preparation → Application → Art → Review)
+- [x] About page: Privacy & Policies section (6 cards: data, photography, cancellations 48h, deposits 20%, health, 72h satisfaction guarantee)
+- [x] Cloudflare tunnel fix: `next.config.ts` rewrites proxy `/api/*` → `http://localhost:4000/*`
+- [x] `.env.local` updated: `NEXT_PUBLIC_API_URL=https://jerry.5onyx.com/api`
+- [x] Switched dev mode to `next build && next start` for tunnel stability
+- [x] Git nested repo fixed (removed `apps/web/.git`), pushed to GitHub `tiaboujerry5-ctrl/nailsbysu`
+- [x] `.gitignore`: added SQLite DB exclusions (`apps/api/prisma/*.db`)
+
+### Phase 13 — Mobile Responsive Pass
+- [x] `app/(public)/page.tsx` — CTA grid: `1fr 1fr` → `grid-cols-1 md:grid-cols-2`, buttons stack + align left on mobile
+- [x] `components/layout/Footer.tsx` — Main grid: `1.5fr 1fr 1fr` → `grid-cols-1 md:grid-cols-3`, bottom bar: `flex-col md:flex-row`
+- [x] `components/gallery/GalleryPageClient.tsx` — "Last clients" intro: `1fr 1fr` → `grid-cols-1 md:grid-cols-2`
+- [x] `app/(public)/contact/page.tsx` — `paddingLeft: 48` → `px-6 md:px-12`, layout: `1fr 1fr` → `grid-cols-1 md:grid-cols-2`
+- [x] `app/(public)/gallery/page.tsx` — header + content: `paddingLeft: 48` → `px-6 md:px-12`
+- [x] `app/(public)/services/page.tsx` — header + grid: `paddingLeft: 48` → `px-6 md:px-12`
+- [x] `app/(public)/about/page.tsx` — all 5 sections: hardcoded `padding: Xpx 48px` → `px-6 md:px-12 py-X`, all 2-col and 3-col grids made responsive
+- [x] `components/home/ServicesCarousel.tsx` — stage height: fixed `560px` → `clamp(420px, 60vw, 560px)`, section padding uses clamp
+- [x] `components/home/HeroSection.tsx` — top-left copy hidden on phones (`hidden sm:block`), tighter mobile padding
 
 ---
 
@@ -148,4 +174,4 @@
 
 ---
 
-*Last updated: 2026-04-12*
+*Last updated: 2026-04-12 — Phase 13 (mobile responsive pass) complete*
