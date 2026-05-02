@@ -18,25 +18,27 @@ const app = express()
 const PORT = process.env.PORT ?? 4000
 
 const allowedOrigins = [
-  process.env.NEXT_PUBLIC_APP_URL,
   'https://nailsbysu.vercel.app',
   'https://nailsbysu-web.vercel.app',
   'http://localhost:3000',
-].filter(Boolean) as string[]
+  ...(process.env.NEXT_PUBLIC_APP_URL ? [process.env.NEXT_PUBLIC_APP_URL] : []),
+]
 
-app.use(helmet())
+app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }))
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true)
-      } else {
-        callback(new Error(`CORS: origin ${origin} not allowed`))
-      }
-    },
+    origin: allowedOrigins,
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
   })
 )
+app.options('*', cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+}))
 app.use(cookieParser())
 app.use(express.json({ limit: '10mb' }))
 app.use(generalRateLimit)
