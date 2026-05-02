@@ -1,5 +1,5 @@
-import { prisma } from '../db'
-import { argon2id } from 'argon2'
+import { prisma } from '../lib/prisma'
+import argon2 from 'argon2'
 import { sign, SignOptions } from 'jsonwebtoken'
 import { SignUpInput, SignInInput } from '../schemas/auth.schema'
 
@@ -23,7 +23,7 @@ export async function signUpService(input: SignUpInput) {
     throw err
   }
 
-  const hashedPassword = await argon2id.hash(input.password)
+  const hashedPassword = await argon2.hash(input.password)
 
   // Development-only: auto-admin for specific email
   const role = process.env.NODE_ENV !== 'production' && input.email === 'admin@nailsbysu.com' ? 'ADMIN' : 'USER'
@@ -57,7 +57,7 @@ export async function signInService(input: SignInInput) {
     throw err
   }
 
-  const passwordMatch = await argon2id.verify(user.password, input.password)
+  const passwordMatch = await argon2.verify(user.password, input.password)
 
   if (!passwordMatch) {
     const err = new Error('Invalid email or password')
