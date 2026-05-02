@@ -1,6 +1,6 @@
-import argon2 from 'argon2'
-import jwt from 'jsonwebtoken'
-import { prisma } from '../lib/prisma'
+import { prisma } from '../db'
+import { argon2id } from 'argon2'
+import { sign, SignOptions } from 'jsonwebtoken'
 import { SignUpInput, SignInInput } from '../schemas/auth.schema'
 
 export interface AuthUser {
@@ -9,61 +9,65 @@ export interface AuthUser {
   role: string
 }
 
-export async function signUpService(input: SignUpInput): Promise<{ token: string; user: AuthUser }> {
-  const existing = await prisma.user.findUnique({ where: { email: input.email } })
-  if (existing) {
-    throw Object.assign(new Error('Email already in use'), { statusCode: 409 })
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key'
+const JWT_EXPIRES_IN = (process.env.JWT_EXPIRES_IN || '7d') as SignOptions['expiresIn']
+
+export async function signUpService(input: SignUpInput) {
+  const existingUser = await prisma.user.findUnique({
+    where: { email: input.email },
+  })
+
+  if (existingUser) {
+    const err = new Error('Email already registered')
+    ;(err as any).statusCode = 400
+    throw err
   }
 
-  const passwordHash = await argon2.hash(input.password)
+  const hashedPassword = await argon2id.hash(input.password)
 
-  // Dev shortcut: admin@nailsbysu.com gets ADMIN role automatically
-  const role =
-    process.env.NODE_ENV !== 'production' && input.email === 'admin@nailsbysu.com'
-      ? 'ADMIN'
-      : 'CLIENT'
+  // Development-only: auto-admin for specific email
+  const role = process.env.NODE_ENV !== 'production' && input.email === 'admin@nailsbysu.com' ? 'ADMIN' : 'USER'
 
   const user = await prisma.user.create({
     data: {
       email: input.email,
-      passwordHash,
+      password: hashedPassword,
+      firstName: input.firstName,
+      lastName: input.lastName,
+      phone: input.phone,
       role,
-      profile: {
-        create: {
-          firstName: input.firstName,
-          lastName: input.lastName,
-          phone: input.phone,
-        },
-      },
     },
   })
 
-  const authUser: AuthUser = { id: user.id, email: user.email, role: user.role }
-
-  const token = jwt.sign(authUser, process.env.JWT_SECRET!, {
-    expiresIn: process.env.JWT_EXPIRES_IN ?? '7d',
+  const token = sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, {
+    expiresIn: JWT_EXPIRES_IN,
   })
 
-  return { token, user: authUser }
+  return { token, user: { id: user.id, email: user.email, role: user.role } }
 }
 
-export async function signInService(input: SignInInput): Promise<{ token: string; user: AuthUser }> {
-  const user = await prisma.user.findUnique({ where: { email: input.email } })
-
-  if (!user || !user.passwordHash) {
-    throw Object.assign(new Error('Invalid credentials'), { statusCode: 401 })
-  }
-
-  const valid = await argon2.verify(user.passwordHash, input.password)
-  if (!valid) {
-    throw Object.assign(new Error('Invalid credentials'), { statusCode: 401 })
-  }
-
-  const authUser: AuthUser = { id: user.id, email: user.email, role: user.role }
-
-  const token = jwt.sign(authUser, process.env.JWT_SECRET!, {
-    expiresIn: process.env.JWT_EXPIRES_IN ?? '7d',
+export async function signInService(input: SignInInput) {
+  const user = await prisma.user.findUnique({
+    where: { email: input.email },
   })
 
-  return { token, user: authUser }
+  if (!user) {
+    const err = new Error('Invalid email or password')
+    ;(err as any).statusCode = 401
+    throw err
+  }
+
+  const passwordMatch = await argon2id.verify(user.password, input.password)
+
+  if (!passwordMatch) {
+    const err = new Error('Invalid email or password')
+    ;(err as any).statusCode = 401
+    throw err
+  }
+
+  const token = sign({ id: user.id, email: user.email, role: user.role }, JWT_SECRET, {
+    expiresIn: JWT_EXPIRES_IN,
+  })
+
+  return { token, user: { id: user.id, email: user.email, role: user.role } }
 }
