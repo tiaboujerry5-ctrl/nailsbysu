@@ -31,7 +31,7 @@ export async function signUpService(input: SignUpInput) {
   const user = await prisma.user.create({
     data: {
       email: input.email,
-      password: hashedPassword,
+      passwordHash: hashedPassword,
       firstName: input.firstName,
       lastName: input.lastName,
       phone: input.phone,
@@ -57,7 +57,7 @@ export async function signInService(input: SignInInput) {
     throw err
   }
 
-  const passwordMatch = await argon2.verify(user.password, input.password)
+  const passwordMatch = await argon2.verify(user.passwordHash!, input.password)
 
   if (!passwordMatch) {
     const err = new Error('Invalid email or password')
