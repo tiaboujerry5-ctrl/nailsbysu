@@ -17,10 +17,23 @@ import contactRoutes from './routes/contact.routes'
 const app = express()
 const PORT = process.env.PORT ?? 4000
 
+const allowedOrigins = [
+  process.env.NEXT_PUBLIC_APP_URL,
+  'https://nailsbysu.vercel.app',
+  'https://nailsbysu-web.vercel.app',
+  'http://localhost:3000',
+].filter(Boolean) as string[]
+
 app.use(helmet())
 app.use(
   cors({
-    origin: process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000',
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error(`CORS: origin ${origin} not allowed`))
+      }
+    },
     credentials: true,
   })
 )
