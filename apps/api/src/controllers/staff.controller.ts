@@ -41,7 +41,7 @@ export async function getStaffController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const staff = await getStaffById(req.params.id)
+    const staff = await getStaffById(req.params.id as string)
     res.status(200).json(staff)
   } catch (err) {
     next(err)
@@ -69,7 +69,7 @@ export async function updateStaffController(
 ): Promise<void> {
   try {
     const input = updateStaffSchema.parse(req.body)
-    const staff = await updateStaffRecord(req.params.id, input)
+    const staff = await updateStaffRecord(req.params.id as string, input)
     res.status(200).json(staff)
   } catch (err) {
     next(err)
@@ -82,7 +82,7 @@ export async function deleteStaffController(
   next: NextFunction
 ): Promise<void> {
   try {
-    await deleteStaffRecord(req.params.id)
+    await deleteStaffRecord(req.params.id as string)
     res.status(204).send()
   } catch (err) {
     next(err)
