@@ -1,11 +1,11 @@
 import { Request, Response, NextFunction } from 'express'
 import { createBookingSchema, updateBookingStatusSchema } from '../schemas/booking.schema'
 import {
-  createBooking,
-  getMyBookings,
+  createBookingService,
+  getBookingsForUser,
   getAllBookings,
-  updateBookingStatus,
-  cancelBooking,
+  updateBookingStatusService,
+  cancelBookingService,
 } from '../services/booking.service'
 
 export async function createBookingController(
@@ -15,7 +15,7 @@ export async function createBookingController(
 ): Promise<void> {
   try {
     const input = createBookingSchema.parse(req.body)
-    const booking = await createBooking(input, req.user!.id)
+    const booking = await createBookingService(input, req.user!.id)
     res.status(201).json(booking)
   } catch (err) {
     next(err)
@@ -28,7 +28,7 @@ export async function getMyBookingsController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const bookings = await getMyBookings(req.user!.id)
+    const bookings = await getBookingsForUser(req.user!.id)
     res.status(200).json(bookings)
   } catch (err) {
     next(err)
@@ -36,7 +36,7 @@ export async function getMyBookingsController(
 }
 
 export async function getAllBookingsController(
-  req: Request,
+  _req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> {
@@ -55,7 +55,7 @@ export async function updateBookingStatusController(
 ): Promise<void> {
   try {
     const input = updateBookingStatusSchema.parse(req.body)
-    const booking = await updateBookingStatus(req.params.id as string, input)
+    const booking = await updateBookingStatusService(req.params.id as string, input)
     res.status(200).json(booking)
   } catch (err) {
     next(err)
@@ -68,7 +68,7 @@ export async function cancelBookingController(
   next: NextFunction
 ): Promise<void> {
   try {
-    await cancelBooking(req.params.id as string, req.user!.id)
+    await cancelBookingService(req.params.id as string, req.user!.id)
     res.status(204).send()
   } catch (err) {
     next(err)
