@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import {
-  listGallery,
-  listGalleryAdmin,
-  uploadImage,
-  deleteImage,
-  reorderGallery,
+  getPublishedGallery,
+  getAllGalleryAdmin,
+  uploadGalleryImage,
+  deleteGalleryImage,
+  updateGallerySortOrder,
 } from '../services/gallery.service'
 
 export async function listGalleryController(
@@ -13,7 +13,7 @@ export async function listGalleryController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const images = await listGallery()
+    const images = await getPublishedGallery()
     res.status(200).json(images)
   } catch (err) {
     next(err)
@@ -26,7 +26,7 @@ export async function listGalleryAdminController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const images = await listGalleryAdmin()
+    const images = await getAllGalleryAdmin()
     res.status(200).json(images)
   } catch (err) {
     next(err)
@@ -39,10 +39,13 @@ export async function uploadImageController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const file = req.file
-    const caption = req.body.caption
-    const category = req.body.category
-    const image = await uploadImage(file!, caption, category)
+    const file = req.file!
+    const image = await uploadGalleryImage(
+      file.buffer,
+      file.originalname,
+      req.body.caption,
+      req.body.category
+    )
     res.status(201).json(image)
   } catch (err) {
     next(err)
@@ -55,7 +58,7 @@ export async function deleteImageController(
   next: NextFunction
 ): Promise<void> {
   try {
-    await deleteImage(req.params.id as string)
+    await deleteGalleryImage(req.params.id as string)
     res.status(204).send()
   } catch (err) {
     next(err)
@@ -68,9 +71,8 @@ export async function reorderGalleryController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const ids = req.body.ids
-    const result = await reorderGallery(ids)
-    res.status(200).json(result)
+    await updateGallerySortOrder(req.body.items)
+    res.status(200).json({ ok: true })
   } catch (err) {
     next(err)
   }
