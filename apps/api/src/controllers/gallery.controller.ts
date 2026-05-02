@@ -1,10 +1,10 @@
 import { Request, Response, NextFunction } from 'express'
 import {
-  getPublishedGallery,
-  getAllGalleryAdmin,
-  uploadGalleryImage,
-  deleteGalleryImage,
-  updateGallerySortOrder,
+  listGallery,
+  listGalleryAdmin,
+  uploadImage,
+  deleteImage,
+  reorderGallery,
 } from '../services/gallery.service'
 
 export async function listGalleryController(
@@ -13,7 +13,7 @@ export async function listGalleryController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const images = await getPublishedGallery()
+    const images = await listGallery()
     res.status(200).json(images)
   } catch (err) {
     next(err)
@@ -26,7 +26,7 @@ export async function listGalleryAdminController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const images = await getAllGalleryAdmin()
+    const images = await listGalleryAdmin()
     res.status(200).json(images)
   } catch (err) {
     next(err)
@@ -39,16 +39,10 @@ export async function uploadImageController(
   next: NextFunction
 ): Promise<void> {
   try {
-    if (!req.file) {
-      res.status(400).json({ error: 'No file uploaded' })
-      return
-    }
-    const image = await uploadGalleryImage(
-      req.file.buffer,
-      req.file.originalname,
-      req.body.caption,
-      req.body.category
-    )
+    const file = req.file
+    const caption = req.body.caption
+    const category = req.body.category
+    const image = await uploadImage(file!, caption, category)
     res.status(201).json(image)
   } catch (err) {
     next(err)
@@ -61,7 +55,7 @@ export async function deleteImageController(
   next: NextFunction
 ): Promise<void> {
   try {
-    await deleteGalleryImage(req.params.id)
+    await deleteImage(req.params.id as string)
     res.status(204).send()
   } catch (err) {
     next(err)
@@ -74,9 +68,9 @@ export async function reorderGalleryController(
   next: NextFunction
 ): Promise<void> {
   try {
-    const { items } = req.body as { items: { id: string; sortOrder: number }[] }
-    await updateGallerySortOrder(items)
-    res.status(200).json({ message: 'Gallery reordered' })
+    const ids = req.body.ids
+    const result = await reorderGallery(ids)
+    res.status(200).json(result)
   } catch (err) {
     next(err)
   }
