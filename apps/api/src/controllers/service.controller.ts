@@ -4,9 +4,9 @@ import {
   getAllServices,
   getAllServicesAdmin,
   getServiceById,
-  createService,
-  updateService,
-  deleteService,
+  createServiceRecord,
+  updateServiceRecord,
+  deleteServiceRecord,
 } from '../services/service.service'
 
 export async function listServicesController(
@@ -55,7 +55,7 @@ export async function createServiceController(
 ): Promise<void> {
   try {
     const input = createServiceSchema.parse(req.body)
-    const service = await createService(input)
+    const service = await createServiceRecord(input)
     res.status(201).json(service)
   } catch (err) {
     next(err)
@@ -69,7 +69,7 @@ export async function updateServiceController(
 ): Promise<void> {
   try {
     const input = updateServiceSchema.parse(req.body)
-    const service = await updateService(req.params.id as string, input)
+    const service = await updateServiceRecord(req.params.id as string, input)
     res.status(200).json(service)
   } catch (err) {
     next(err)
@@ -82,7 +82,7 @@ export async function deleteServiceController(
   next: NextFunction
 ): Promise<void> {
   try {
-    await deleteService(req.params.id as string)
+    await deleteServiceRecord(req.params.id as string)
     res.status(204).send()
   } catch (err) {
     next(err)
